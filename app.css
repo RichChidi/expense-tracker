@@ -1,0 +1,101 @@
+*{
+  box-sizing: border-box;
+  margin: 1px;
+}
+
+body{
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  justify-content: space-between;
+}
+
+.expense-tracker-dashboard{
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.total-balance-div{
+  width: 100%;
+  min-height: 10dvh;
+  background-color: rgb(32 109 229);
+  color: white;
+  padding: 8px;
+  border-radius: 15px;
+}
+
+.total-balance-view{
+  display: flex;
+  justify-content: space-between;
+}
+
+.income-and-expenses{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  column-gap: 10px;
+  width: 100%;
+  min-height: 10dvh;
+}
+
+.total-income-div,  .total-expenses-div{
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 4px solid;
+}
+.total-income-div{
+  border-top-color: rgb(16 185 129);
+}
+.total-expenses-div{
+  border-top-color: rgb(239 68 68);
+}
+
+.expense-chart{
+  display: flex;
+  flex-direction: column;
+}
+.expense-chart-heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recent-transactions{
+  display: flex;
+  flex-direction: column;
+}
+.recent-transactions-heading{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#add-transaction-form{
+  display: flex;
+  flex-direction: column;  
+  gap: 12px;
+  padding: 15px;
+}
+
+#add-transaction-form input, #add-transaction-form select{
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+#save-btn{
+  background-color: rgb(32 109 229);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
