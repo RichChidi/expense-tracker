@@ -8,7 +8,8 @@ body{
   display: flex;
   flex-direction: column;
   padding: 15px;
-  justify-content: space-between;
+  row-gap: 10px;
+  align-items: center;
 }
 
 .expense-tracker-dashboard{
@@ -29,6 +30,13 @@ body{
 .total-balance-view{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+#hide{
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .income-and-expenses{
@@ -52,8 +60,18 @@ body{
 .total-income-div{
   border-top-color: rgb(16 185 129);
 }
+.total-income{
+  color: rgb(34 197 94);
+}
+
 .total-expenses-div{
   border-top-color: rgb(239 68 68);
+}
+.total-income-div, .total-expenses-div{
+  flex: 1;
+}
+.total-expenses{
+  color: rgb(239 68 68);
 }
 
 .expense-chart{
@@ -65,6 +83,18 @@ body{
   justify-content: space-between;
   align-items: center;
 }
+.chart-container{
+  position: relative;
+  height: 250px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+.chart-container canvas{
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
 
 .recent-transactions{
   display: flex;
@@ -75,12 +105,34 @@ body{
   align-items: center;
   justify-content: space-between;
 }
+.recent-transactions-list{
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+.recent-transaction{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
+}
+.transaction-icon{
+  padding: 8px;
+  border-radius: 8px;
+}
+.transaction-desc{
+  font-weight: bold;
+}
 
 #add-transaction-form{
-  display: flex;
   flex-direction: column;  
   gap: 12px;
   padding: 15px;
+  display: none;
+}
+
+#add-transaction-form.open{
+  display: flex;
 }
 
 #add-transaction-form input, #add-transaction-form select{
@@ -98,4 +150,19 @@ body{
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+#add-transaction-btn{
+  width: 100%;
+  max-width: 450px;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: rgb(32 109 229);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  position: sticky;
+  bottom: 15px;
 }
