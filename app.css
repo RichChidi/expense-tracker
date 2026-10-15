@@ -120,6 +120,62 @@ body{
   padding: 8px;
   border-radius: 8px;
 }
+.transaction-desc-div{
+
+  flex: 3;
+}
+.transaction-amount-div{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+}
+
+.transaction-amount{
+  font-weight: 600;
+}
+
+.more{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.transaction-amount-div .edit-delete-div{
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-button,
+.del-button,
+.cancel-button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.edit-button:hover,
+.del-button:hover,
+.cancel-button:hover,
+.more:hover{
+  background-color: rgba(32, 109, 229, 0.08);
+}
+
 .transaction-desc{
   font-weight: bold;
 }

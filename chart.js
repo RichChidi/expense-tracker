@@ -36,14 +36,13 @@ export function renderCategoriesChart(transactions) {
   const food = transactions.filter(t => t.category === 'Food').reduce((sum, t) => sum + t.amount, 0);
   const transport = transactions.filter(t => t.category === 'Transport').reduce((sum, t) => sum + t.amount, 0);
   const shopping = transactions.filter(t => t.category === 'Shopping').reduce((sum, t) => sum + t.amount, 0);  
-  const bills = transactions.filter(t => t.category === 'Bills').reduce((sum, t) => sum + t.amount, 0);
-  const income = transactions.filter(t => t.category === 'Income').reduce((sum, t) => sum + t.amount, 0);  
+  const bills = transactions.filter(t => t.category === 'Bills').reduce((sum, t) => sum + t.amount, 0); 
   
   const data = {
-    labels: ['Food', 'Transport', 'Shopping', 'Bills', 'Income'],
+    labels: ['Food', 'Transport', 'Shopping', 'Bills'],
     datasets: [{
-      data: [food, transport, shopping, bills, income],
-      backgroundColor: ['rgb(168, 106, 71)', 'rgb(251, 146, 43)', 'rgb(132, 88, 232)', 'rgb(71, 85, 105)', 'rgb(52, 168, 83)']
+      data: [food, transport, shopping, bills],
+      backgroundColor: ['rgb(168, 106, 71)', 'rgb(251, 146, 43)', 'rgb(132, 88, 232)', 'rgb(71, 85, 105)']
     }]
   };
   if (myChartIntance) {
