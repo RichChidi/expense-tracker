@@ -5,7 +5,10 @@ let transactions = normalizeTransactions(JSON.parse(localStorage.getItem(STORAGE
 let totalBalance = 0;
 let totalIncome = 0;
 let totalExpenses = 0;
+let monthlyIncome = 0;
+let monthlyExpenses = 0;
 let editingTransactionId = null;
+let showAllTransactions = false;
 
 const formElement = document.getElementById('add-transaction-form');
 const descElement = document.getElementById('desc');
@@ -125,6 +128,28 @@ function calculateTotalExpenses() {
   });
 }
 
+function calculateMonthlyTotals() {
+  const now = new Date();
+  monthlyIncome = 0;
+  monthlyExpenses = 0;
+
+  transactions.forEach((transaction) => {
+    const transactionDate = new Date(transaction.date);
+    if (
+      transactionDate.getFullYear() !== now.getFullYear() ||
+      transactionDate.getMonth() !== now.getMonth()
+    ) {
+      return;
+    }
+
+    if (transaction.type === 'income') {
+      monthlyIncome += Number(transaction.amount) || 0;
+    } else if (transaction.type === 'expense') {
+      monthlyExpenses += Number(transaction.amount) || 0;
+    }
+  });
+}
+
 function calculateTotalBalance() {
   totalBalance = totalIncome - totalExpenses;
 }
@@ -132,6 +157,7 @@ function calculateTotalBalance() {
 function renderPage() {
   calculateTotalIncome();
   calculateTotalExpenses();
+  calculateMonthlyTotals();
   calculateTotalBalance();
 
   let expenseTrackerHTML = `
@@ -146,12 +172,12 @@ function renderPage() {
     <div class="income-and-expenses">
       <section class="total-income-div">
         <p>Income</p>
-        <h2 class="total-income">$${totalIncome}</h2>
+        <h2 class="total-income">$${monthlyIncome}</h2>
         <p>This month</p>
       </section>
       <section class="total-expenses-div">
         <p>Expenses</p>
-        <h2 class="total-expenses">$${totalExpenses}</h2>
+        <h2 class="total-expenses">$${monthlyExpenses}</h2>
         <p>This month</p>
       </section>
     </div>
@@ -164,7 +190,6 @@ function renderPage() {
             <option value="income-vs-expenses">Income vs Expenses</option>
           </select>
         </h6>
-        <h6>See all</h6>
       </section>
       <section class="chart-container">
         <canvas id="my-chart"></canvas>
@@ -173,7 +198,11 @@ function renderPage() {
     <div class="recent-transactions">
       <section class="recent-transactions-heading">
         <h5>Recent Transactions</h5>
-        <h6>See all</h6>
+        ${
+          transactions.length > 5
+            ? `<button class="see-all-transactions" type="button" aria-expanded="${showAllTransactions}">${showAllTransactions ? 'Show recent' : 'See all'}</button>`
+            : ''
+        }
       </section>
       <section class="recent-transactions-list">
         ${
@@ -203,13 +232,15 @@ function renderPage() {
   }
 
   bindTransactionActions();
+  bindTransactionListToggle();
   bindBalanceToggle();
 }
 
 function renderTransactionList() {
   let transactionHTML = '';
+  const visibleTransactions = showAllTransactions ? transactions : transactions.slice(0, 5);
 
-  transactions.forEach((transaction) => {
+  visibleTransactions.forEach((transaction) => {
     const date = new Date(transaction.date);
     const formattedDate = date.toLocaleDateString('en-US', {
       month: 'short',
@@ -272,6 +303,18 @@ function renderTransactionList() {
   });
 
   return transactionHTML;
+}
+
+function bindTransactionListToggle() {
+  const toggleButton = document.querySelector('.see-all-transactions');
+  if (!toggleButton) {
+    return;
+  }
+
+  toggleButton.addEventListener('click', () => {
+    showAllTransactions = !showAllTransactions;
+    renderPage();
+  });
 }
 
 function getCategoryColor(category) {
@@ -391,4 +434,3 @@ typeElement.addEventListener('change', () => {
 });
 
 renderPage();
-
